@@ -1,8 +1,11 @@
 import React from 'react'
+import { View, Text } from 'react-native'
 
 const Historial = () => {
   return (
-    <div>Historial</div>
+    <View>
+      <Text>Historial</Text>
+    </View>
   )
 }
 
