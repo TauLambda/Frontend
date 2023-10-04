@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-native'
+import { Button, Text } from 'react-native'
 
 const Welcome = ({navigation}) => {
   return (
@@ -10,10 +10,6 @@ const Welcome = ({navigation}) => {
         }
     />
   );
-};
-
-const PantallaHistorial = ({navigation, route}) => {
-    return <Text></Text>
 };
 
 export default Welcome

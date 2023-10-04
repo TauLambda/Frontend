@@ -14,7 +14,7 @@ const Rutas = () => {
             <Stack.Screen
                 name="Welcome"
                 component={Welcome}
-                option={{title: 'Welcome'}}
+                options={{ title: 'Welcome'}}
             />
             <Stack.Screen
                 name="Historial"
