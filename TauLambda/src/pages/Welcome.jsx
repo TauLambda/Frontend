@@ -1,8 +1,6 @@
 import React from 'react'
 import { Avatar, Text } from '@ui-kitten/components'
-import { ImageBackground, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { Image } from 'react-native';
-
+import { ImageBackground, View, StyleSheet, TouchableOpacity, FlatList, Button, Text, Image } from 'react-native';
 import AvatarImage from '../images/senora.png';
 import WelcomeImage from '../images/Brands_People_OxxoGas_gasolinera.png';
 import GasImage from '../images/Gas.png';
