@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Welcome from './Welcome';
 import CargaParticular from './CargaParticular';
-import HistorialParticular from './PerfilParticular';
+import HistorialParticular from './HistorialParticular';
 import PerfilParticular from './PerfilParticular';
 
 const Stack = createNativeStackNavigator();

@@ -22,9 +22,16 @@ const DATA = [
   }
 ];
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, navigation }) => {
+  const handlePress = () => {
+    if (item.texto === 'Carga'){
+      navigation.navigate('CargaParticular');
+    } else if (item.texto === 'Historial'){
+      navigation.navigate('HistorialParticular');
+    }
+  };
   return(
-    <TouchableOpacity>
+    <TouchableOpacity onPress={handlePress}>
       <View
         style={{
           flex: 1,
@@ -77,6 +84,9 @@ const ListItem = ({ item }) => {
 }
 
 const Welcome = ({navigation}) => {
+  const handlePress = () => {
+    navigation.navigate('PerfilParticular');
+  }
   return (
     <View style={[
       styles.container,
@@ -116,7 +126,7 @@ const Welcome = ({navigation}) => {
             alignItems:'center',
           }}
         >
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handlePress}>
             <Avatar
               source={AvatarImage}
               ImageComponent={ImageBackground}
@@ -175,7 +185,7 @@ const Welcome = ({navigation}) => {
             <FlatList
               data={DATA}
               keyExtractor={(item) => item.id}
-              renderItem={({item}) => <ListItem item={item}/>}
+              renderItem={({item}) => <ListItem item={item} navigation={navigation}/>}
               numColumns={2}
               columnWrapperStyle={{
                 justifyContent: 'space-between',
