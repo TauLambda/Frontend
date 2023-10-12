@@ -3,6 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Welcome from './Welcome';
+import CargaParticular from './CargaParticular';
+import HistorialParticular from './HistorialParticular';
+import PerfilParticular from './PerfilParticular';
 import Historial from './Historial';
 import LogIn from './LogIn';
 
@@ -24,8 +27,19 @@ const Rutas = () => {
                 options={{ title: 'Welcome'}}
             />
             <Stack.Screen
-                name="Historial"
-                component={Historial}
+              name="CargaParticular"
+              component={CargaParticular}
+              options={{ title: 'Carga Particular'}}
+            />
+            <Stack.Screen
+                name="HistorialParticular"
+                component={HistorialParticular}
+                options={{ title: 'Historial Particular' }}
+            />
+            <Stack.Screen
+              name="PerfilParticular"
+              component={PerfilParticular}
+              options={{ title: 'Perfil Particular' }}
             />
         </Stack.Navigator>
     </NavigationContainer>
