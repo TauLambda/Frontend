@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import Rutas from './src/pages/rutas';
+import { StyleSheet, View } from 'react-native';
+import Rutas from './src/pages/Rutas';
 
 export default function App() {
   return (
