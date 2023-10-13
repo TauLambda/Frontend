@@ -6,44 +6,43 @@ import Welcome from './Welcome';
 import CargaParticular from './CargaParticular';
 import HistorialParticular from './HistorialParticular';
 import PerfilParticular from './PerfilParticular';
-import Historial from './Historial';
 import LogIn from './LogIn';
 
 const Stack = createNativeStackNavigator();
 
 const Rutas = () => {
-  return (
-    <NavigationContainer>
+return (
+<NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={LogIn}
-            options={{ title: 'Login'}}
-          />
+                <Stack.Screen
+                name="Login"
+                component={LogIn}
+                options={{ title: 'Login'}}
+                />
 
-            <Stack.Screen
-                name="Welcome"
-                component={Welcome}
-                options={{ title: 'Welcome'}}
-            />
-            <Stack.Screen
-              name="CargaParticular"
-              component={CargaParticular}
-              options={{ title: 'Carga Particular'}}
-            />
-            <Stack.Screen
-                name="HistorialParticular"
-                component={HistorialParticular}
-                options={{ title: 'Historial Particular' }}
-            />
-            <Stack.Screen
-              name="PerfilParticular"
-              component={PerfilParticular}
-              options={{ title: 'Perfil Particular' }}
-            />
+                <Stack.Screen
+                        name="Welcome"
+                        component={Welcome}
+                        options={{ title: 'Welcome'}}
+                />
+                <Stack.Screen
+                name="CargaParticular"
+                component={CargaParticular}
+                options={{ title: 'Carga Particular'}}
+                />
+                <Stack.Screen
+                        name="HistorialParticular"
+                        component={HistorialParticular}
+                        options={{ title: 'Historial Particular' }}
+                />
+                <Stack.Screen
+                name="PerfilParticular"
+                component={PerfilParticular}
+                options={{ title: 'Perfil Particular' }}
+                />
         </Stack.Navigator>
-    </NavigationContainer>
-  );
+</NavigationContainer>
+);
 };
 
 export default Rutas;

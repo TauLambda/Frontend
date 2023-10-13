@@ -1,34 +1,30 @@
 import React from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { SvgUri } from 'react-native-svg';
 
-const LogIn = () => {
+
+const LogIn = ({navigation}) => {
         return (
                 <View
                 style={{
                 flex: 1,
                 justifyContent: "center",
                 justifyContent: "center",
-                margin: 15,
+                margin: 15
                 }}
                 >
                         <View style={{ alignItems: "center" }}>
                                 <Image
                                 style={{ width: 300, height: 300 }}
-                                source={require("../images/Brands_People_OXXOGAS_.png")}
-                                />
-                        </View>
-                        <View style={{ alignItems: "center" }}>
-                                <Image
-                                style={{ width: 300, height: 300 }}
-                                source={require("../images/Loing_image.png")}
+                                source={require("../images/OXXOGAS.png")}
                                 />
                         </View>
                         <Text
                         style={{
                         fontSize: 28,
                         fontWeight: "500",
-                        color: "#333",
+                        color: "#9b101a",
                         marginBottom: 30,
                         paddingLeft: 10,
                         }}
@@ -41,7 +37,7 @@ const LogIn = () => {
                                         <MaterialIcons
                                         name="alternate-email"
                                         size={30}
-                                        color={"#666"}
+                                        color={"#e8a042"}
                                         style={{ marginRight: 5 }}
                                         />
                                         <TextInput
@@ -62,7 +58,7 @@ const LogIn = () => {
                                         <MaterialIcons
                                         name="lock"
                                         size={30}
-                                        color={"#666"}
+                                        color={"#e8a042"}
                                         style={{ marginRight: 5 }}
                                         />
                                         <TextInput
@@ -79,7 +75,7 @@ const LogIn = () => {
                                         <TouchableOpacity onPress={() => {}}>
                                                 <Text
                                                 style={{
-                                                color: "#AD40AF",
+                                                color: "#de2924",
                                                 fontWeight: "700",
                                                 paddingTop: 5,
                                                 paddingLeft: 5,
@@ -93,7 +89,7 @@ const LogIn = () => {
                         <TouchableOpacity
                         onPress={() => {}}
                         style={{
-                        backgroundColor: "#AD40AF",
+                        backgroundColor: "#de2924",
                         padding: 20,
                         borderRadius: 10,
                         marginBottom: 30,
@@ -113,7 +109,8 @@ const LogIn = () => {
                         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
                                 <Text >New to the app?</Text>
                                 <TouchableOpacity onPress={() => {}}>
-                                        <Text style={{color:'#AD40AF', fontWeight: '700', fontSize:17}}> Register</Text>
+                                        <Text 
+                                        style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Register</Text>
                                 </TouchableOpacity>
                         </View>
                 </View>
