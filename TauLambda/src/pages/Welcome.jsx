@@ -30,6 +30,7 @@ const ListItem = ({ item, navigation }) => {
       navigation.navigate('HistorialParticular');
     }
   };
+
   return(
     <TouchableOpacity onPress={handlePress}>
       <View
@@ -37,7 +38,7 @@ const ListItem = ({ item, navigation }) => {
           flex: 1,
           backgroundColor: 'white',
           borderRadius: 20,
-          borderColor: 'black',
+          borderColor: '#ddd',
           borderWidth: 2,
           height: 230,
           width: 160,
@@ -132,7 +133,7 @@ const Welcome = ({navigation}) => {
               ImageComponent={ImageBackground}
               size='large'
               style={{
-                borderColor:'black',
+                borderColor:'#ddd',
                 borderWidth:1,
               }}
             />
@@ -154,6 +155,8 @@ const Welcome = ({navigation}) => {
             height: '100%',
             width: '100%',
             borderRadius:15,
+            borderWidth:1,
+            borderColor:'#ddd'
           }}
         />
       </View>
