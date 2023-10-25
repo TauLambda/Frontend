@@ -87,7 +87,7 @@ const LogIn = ({navigation}) => {
                                 </View>
                         </View>
                         <TouchableOpacity
-                        onPress={() => {}}
+                        onPress={() => {navigation.navigate('Welcome')}}
                         style={{
                         backgroundColor: "#de2924",
                         padding: 20,
@@ -108,7 +108,7 @@ const LogIn = ({navigation}) => {
                         </TouchableOpacity>
                         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
                                 <Text >New to the app?</Text>
-                                <TouchableOpacity onPress={() => {}}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
                                         <Text 
                                         style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Register</Text>
                                 </TouchableOpacity>
@@ -116,5 +116,6 @@ const LogIn = ({navigation}) => {
                 </View>
         );
 };
+
 
 export default LogIn;

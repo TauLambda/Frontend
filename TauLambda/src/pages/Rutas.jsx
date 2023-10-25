@@ -7,6 +7,7 @@ import CargaParticular from './CargaParticular';
 import HistorialParticular from './HistorialParticular';
 import PerfilParticular from './PerfilParticular';
 import LogIn from './LogIn';
+import SignIn from './SignIn';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,12 @@ return (
                 name="Login"
                 component={LogIn}
                 options={{ title: 'Login'}}
+                />
+
+                <Stack.Screen
+                        name="Signin"
+                        component={SignIn}
+                        options={{ title: 'Sign In'}}
                 />
 
                 <Stack.Screen
