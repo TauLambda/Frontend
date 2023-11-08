@@ -1,5 +1,5 @@
 // HomeScreen.js
-
+// hola
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
 import { Button, Text } from '@ui-kitten/components';
