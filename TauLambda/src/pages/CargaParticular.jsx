@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput, Text, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
 import { Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
 
 import LogoImage from '../images/OXXOGAS.png';
 
@@ -66,10 +67,11 @@ const PagoCard = ({ tipoPago, isSelected, onSelect }) => {
 }
 
 const CargaParticular = ({navigation}) => {
+  const [monto, setMonto] = useState(null);
+  const [litros, setLitros] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
   const [selectedPayment, setSelectedPayment] = useState(null);
-  const [monto, setMonto] = useState('');
-  const [litros, setLitros] = useState('');
+  const [jsonData, setJsonData] = useState(null);
 
   const servicios = [
     {servicio: 'Magna', precio:'22.49'},
@@ -81,6 +83,69 @@ const CargaParticular = ({navigation}) => {
     {tipo:'Tarjeta de Credito'},
     {tipo:'Cashback'},
   ];
+
+const obtenerFechaActual = () => {
+  const fecha = new Date();
+  const año = fecha.getFullYear();
+  const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+  const dia = String(fecha.getDate()).padStart(2, '0');
+  const hora = String(fecha.getHours()).padStart(2, '0');
+  const minutos = String(fecha.getMinutes()).padStart(2, '0');
+  const segundos = String(fecha.getSeconds()).padStart(2, '0');
+  return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
+};
+
+const alertaServicioPago = () => {
+  Alert.alert('Error', 'Debe seleccionar un tipo de gasolina y/o método de pago válidos', [
+    {text: 'OK'},
+  ]);
+};
+
+const alertaMontoLitros = () => {
+  Alert.alert('Error', 'Debe ingresar un monto o litros válidos', [
+    {text: 'OK'},
+  ]);
+}
+
+const construirJSON = () => {
+    if (selectedService && selectedPayment) {
+      const montoNum = parseFloat(monto);
+      const litrosNum = parseFloat(litros);
+
+      if (!isNaN(montoNum) && !isNaN(litrosNum)) {
+        const data = {
+          Carga: litrosNum.toFixed(2),
+          Monto: montoNum.toFixed(2),
+          TipoGas: selectedService,
+          MetodoPago: selectedPayment,
+          FechaTransaccion: obtenerFechaActual(),
+        };
+        setJsonData(data);
+
+        console.log(jsonData);
+      } else {
+        alertaMontoLitros();
+      }
+    } else {
+      alertaServicioPago();
+    }
+};
+
+const handleContinuar = async () => {
+  construirJSON();
+
+  if (jsonData !== null) {
+    if (selectedPayment === 'Tarjeta de Credito') {
+      navigation.navigate('TarjetaCredito', {
+         monto: jsonData.Monto,
+        });
+    } else if (selectedPayment === 'Cashback', { jsonData }) {
+      navigation.navigate('Cashback', {
+        monto: jsonData.Monto,
+      });
+    }
+  }
+}
 
   return (
     <View style={[styles.container]}>
@@ -95,12 +160,7 @@ const CargaParticular = ({navigation}) => {
           borderRadius:4,
         }}
       >
-        <Text
-          style={{
-            fontSize:20,
-            color:'white',
-          }}
-        > Realizar Carga </Text>
+        <Text style={{ fontSize:20,color:'white',}}> Realizar Carga </Text>
       </View>
       <View
         style={{
@@ -213,13 +273,11 @@ const CargaParticular = ({navigation}) => {
               alignItems:'center',
               backgroundColor:"#FDC32F",
             }}
+            onPress={() => {
+              handleContinuar()
+            }}
           >
-            <Text
-              style={{
-                fontSize:20,
-                color:'white',
-              }}
-            >Continuar</Text>
+            <Text style={{ fontSize:20, color:'white',}}>Continuar</Text>
           </TouchableOpacity>
         </View>
       </View>

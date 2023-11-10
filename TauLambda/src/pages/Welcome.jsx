@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Text } from '@ui-kitten/components'
 import { ImageBackground, View, StyleSheet, TouchableOpacity, FlatList, Button,  Image } from 'react-native';
+
 import AvatarImage from '../images/senora.png';
 import WelcomeImage from '../images/Brands_People_OxxoGas_gasolinera.png';
 import GasImage from '../images/Gas.png';
@@ -135,16 +136,6 @@ styles.container,
                 borderWidth:1,
               }}
             />
-        <Image
-          source={WelcomeImage}
-          style={{
-            height: '100%',
-            width: '100%',
-            borderRadius:15,
-            borderWidth:1,
-            borderColor:'#ddd'
-          }}
-        />
         </TouchableOpacity>
         </View>
 </View>

@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from "reac
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { SvgUri } from 'react-native-svg';
 import InputField from "../components/InputField";
-import Selector from "../components/Selector"; 
+import Selector from "../components/Selector";
 
 
 const SignIn = ({navigation}) => {
@@ -18,7 +18,7 @@ const SignIn = ({navigation}) => {
                 >
                         <View style={{ justifyContent: "center", flex:0.3,}}>
                                 <Image
-                                style={{ 
+                                style={{
                                         width:'100%',
                                         height:undefined,
                                         aspectRatio:1,
@@ -38,8 +38,8 @@ const SignIn = ({navigation}) => {
                         >Sign In
                         </Text>
                         < ScrollView style={{ marginLeft: 10, marginRight: 10, flex:2}}>
-                                
-                                <InputField  
+
+                                <InputField
                                         label={'Full name'}
                                         icon={<MaterialIcons
                                                 name="emoji-emotions"
@@ -47,7 +47,7 @@ const SignIn = ({navigation}) => {
                                                 color={"#e8a042"}
                                                 style={{ marginRight: 5 }}
                                         />}/>
-                                <InputField  
+                                <InputField
                                         label={'Phone Number'}
                                         icon={<MaterialIcons
                                                 name="phone"
@@ -55,9 +55,9 @@ const SignIn = ({navigation}) => {
                                                 color={"#e8a042"}
                                                 style={{ marginRight: 5 }}
                                         />}
-                                        inputType="password"/>
+                                        />
 
-                                <InputField  
+                                <InputField
                                         label={'Email address'}
                                         icon={<MaterialIcons
                                                 name="alternate-email"
@@ -66,7 +66,7 @@ const SignIn = ({navigation}) => {
                                                 style={{ marginRight: 5 }}
                                         />}
                                         keyboardType="email-address"/>
-                                <InputField  
+                                <InputField
                                         label={'Password'}
                                         icon={<MaterialIcons
                                                 name="lock"
@@ -75,7 +75,7 @@ const SignIn = ({navigation}) => {
                                                 style={{ marginRight: 5 }}
                                         />}
                                         inputType="password"/>
-                                <InputField  
+                                <InputField
                                         label={'Confirm Password'}
                                         icon={<MaterialIcons
                                                 name="lock"
@@ -84,7 +84,7 @@ const SignIn = ({navigation}) => {
                                                 style={{ marginRight: 5 }}
                                         />}
                                         inputType="password"/>
-                                <InputField  
+                                <InputField
                                         label={'License Plate'}
                                         icon={<MaterialIcons
                                                 name="web-asset"
@@ -104,7 +104,7 @@ const SignIn = ({navigation}) => {
                         borderRadius: 10,
                         marginBottom: 30,
                         }}
-                        
+
                         >
                                 <Text
                                 style={{
@@ -120,12 +120,12 @@ const SignIn = ({navigation}) => {
                         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
                                 <Text >Already have an account?</Text>
                                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                                        <Text 
+                                        <Text
                                         style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Log In</Text>
                                 </TouchableOpacity>
                         </View>
                         </ScrollView>
-                        
+
                 </View>
         );
 };

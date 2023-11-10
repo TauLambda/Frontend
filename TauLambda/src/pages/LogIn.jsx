@@ -72,18 +72,6 @@ const LogIn = ({navigation}) => {
                                         }}
                                         secureTextEntry={true}
                                         />
-                                        <TouchableOpacity onPress={() => {}}>
-                                                <Text
-                                                style={{
-                                                color: "#de2924",
-                                                fontWeight: "700",
-                                                paddingTop: 5,
-                                                paddingLeft: 5,
-                                                }}
-                                                >
-                                                Forgot?
-                                                </Text>
-                                        </TouchableOpacity>
                                 </View>
                         </View>
                         <TouchableOpacity
@@ -109,7 +97,7 @@ const LogIn = ({navigation}) => {
                         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
                                 <Text >New to the app?</Text>
                                 <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
-                                        <Text 
+                                        <Text
                                         style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Register</Text>
                                 </TouchableOpacity>
                         </View>
