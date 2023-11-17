@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { readCardsByUserId } from '../services/cardService';
 
 const TarjetaCredito = ({ route, navigation }) => {
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [isModalVisible, setModalVisible] = React.useState(false);
+  const [cardsData, setCardsData] = useState([]);
+
   const { monto } = route.params;
+  const userId = 5;
+
+  const fetchData = async () => {
+    try {
+      readCardsByUserId(userId).then((data) => {
+        setCardsData(data);
+      });
+    } catch (error) {
+      console.error('Error al obtener las tarjetas:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const DATA = [
     {
@@ -21,9 +41,6 @@ const TarjetaCredito = ({ route, navigation }) => {
       CVV: 252,
     },
   ];
-
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [isModalVisible, setModalVisible] = React.useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -65,19 +82,19 @@ const TarjetaCredito = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
       <FlatList
-        data={DATA}
-        keyExtractor={(item) => item.id}
+        data={cardsData}
+        keyExtractor={(item) => item.ID_tarjeta}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={[
               styles.card,
-              { borderColor: selectedCard === item.id ? '#FDC32F' : '#ddd' },
+              { borderColor: selectedCard === item.ID_tarjeta ? '#FDC32F' : '#ddd' },
             ]}
-            onPress={() => setSelectedCard(item.id)}
+            onPress={() => setSelectedCard(item.ID_tarjeta)}
           >
             <View style={{ flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center' }}>
-              <Text>{item.nombre}</Text>
-              <Text>{`**** **** **** ${item.numeroTarjeta.toString().substr(-4)}`}</Text>
+              <Text>{item.Nombre}</Text>
+              <Text>{`**** **** **** ${item.NumeroTarjeta.toString().substr(-4)}`}</Text>
             </View>
           </TouchableOpacity>
         )}

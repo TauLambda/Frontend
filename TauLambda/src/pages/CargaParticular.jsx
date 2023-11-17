@@ -1,14 +1,6 @@
-import { StyleSheet, View, TextInput, Text, Button, Alert } from 'react-native';
-import { Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
-
-import LogoImage from '../images/OXXOGAS.png';
+import { StyleSheet, View, TextInput, Text, Alert, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons, FontAwesome, MaterialIcons, Fontisto } from '@expo/vector-icons';
 
 const GasolinaCard = ({ servicio, precio, isSelected, onSelect }) => {
   const coloresGasolina = {
@@ -122,7 +114,6 @@ const construirJSON = () => {
         };
         setJsonData(data);
 
-        console.log(jsonData);
       } else {
         alertaMontoLitros();
       }
@@ -133,6 +124,9 @@ const construirJSON = () => {
 
 const handleContinuar = async () => {
   construirJSON();
+
+  console.log(jsonData);
+
 
   if (jsonData !== null) {
     if (selectedPayment === 'Tarjeta de Credito') {
