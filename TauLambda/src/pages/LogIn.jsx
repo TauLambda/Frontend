@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { SvgUri } from 'react-native-svg';
+import InputField from "../components/InputField";
 
 
 const LogIn = ({navigation}) => {
@@ -28,63 +29,28 @@ const LogIn = ({navigation}) => {
                         marginBottom: 30,
                         paddingLeft: 10,
                         }}
-                        >Log In
+                        >Ingresar a la cuenta
                         </Text>
                         <View style={{ marginLeft: 10, marginRight: 10 }}>
-                                <View
-                                style={{ flexDirection: "row", paddingBottom: 0, marginBottom: 25 }}
-                                >
-                                        <MaterialIcons
-                                        name="alternate-email"
-                                        size={30}
-                                        color={"#e8a042"}
-                                        style={{ marginRight: 5 }}
-                                        />
-                                        <TextInput
-                                        placeholder="Email ID"
-                                        style={{
-                                        backgroundColor: "#ccc",
-                                        flex: 1,
-                                        paddingVertical: 0,
-                                        borderRadius: 45,
-                                        paddingLeft: 10,
-                                        }}
-                                        keyboardType="email-address"
-                                        />
-                                </View>
-                                <View
-                                style={{ flexDirection: "row", paddingBottom: 0, marginBottom: 25 }}
-                                >
-                                        <MaterialIcons
-                                        name="lock"
-                                        size={30}
-                                        color={"#e8a042"}
-                                        style={{ marginRight: 5 }}
-                                        />
-                                        <TextInput
-                                        placeholder="Password"
-                                        style={{
-                                        backgroundColor: "#ccc",
-                                        flex: 1,
-                                        paddingVertical: 0,
-                                        borderRadius: 45,
-                                        paddingLeft: 10,
-                                        }}
-                                        secureTextEntry={true}
-                                        />
-                                        <TouchableOpacity onPress={() => {}}>
-                                                <Text
-                                                style={{
-                                                color: "#de2924",
-                                                fontWeight: "700",
-                                                paddingTop: 5,
-                                                paddingLeft: 5,
-                                                }}
-                                                >
-                                                Forgot?
-                                                </Text>
-                                        </TouchableOpacity>
-                                </View>
+                        <InputField  
+                            label={'Correo electrónico'}
+                            icon={<MaterialIcons
+                                    name="alternate-email"
+                                    size={30}
+                                    color={"#e8a042"}
+                                    style={{ marginRight: 5 }}
+                            />}
+                            keyboardType="email-address"/>
+
+                        <InputField  
+                            label={'Contraseña'}
+                            icon={<MaterialIcons
+                                    name="lock"
+                                    size={30}
+                                    color={"#e8a042"}
+                                    style={{ marginRight: 5 }}
+                            />}
+                            inputType="password"/>
                         </View>
                         <TouchableOpacity
                         onPress={() => {navigation.navigate('Welcome')}}
@@ -103,14 +69,14 @@ const LogIn = ({navigation}) => {
                                 color: "#fff",
                                 }}
                                 >
-                                Log In
+                                Ingresar
                                 </Text>
                         </TouchableOpacity>
                         <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
-                                <Text >New to the app?</Text>
+                                <Text >¿Nuevo en la app?</Text>
                                 <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
                                         <Text 
-                                        style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Register</Text>
+                                        style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Registrarse</Text>
                                 </TouchableOpacity>
                         </View>
                 </View>
