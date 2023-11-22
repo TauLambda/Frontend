@@ -8,6 +8,9 @@ import HistorialParticular from './HistorialParticular';
 import PerfilParticular from './PerfilParticular';
 import LogIn from './LogIn';
 import SignIn from './SignIn';
+import TarjetaCredito from './TarjetaCredito';
+import AgregarTarjeta from './AgregarTarjeta';
+import Cashback from './Cashback';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +49,21 @@ return (
                 name="PerfilParticular"
                 component={PerfilParticular}
                 options={{ title: 'Perfil Particular' }}
+                />
+                <Stack.Screen
+                name="TarjetaCredito"
+                component={TarjetaCredito}
+                options={{ title: 'Tarjeta de Credito'}}
+                />
+                <Stack.Screen
+                name='AgregarTarjeta'
+                component={AgregarTarjeta}
+                options={{ title: 'Agregar Tarjeta' }}
+                />
+                <Stack.Screen
+                name='Cashback'
+                component={Cashback}
+                options={{ title: 'Cashback' }}
                 />
         </Stack.Navigator>
 </NavigationContainer>

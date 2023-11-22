@@ -1,6 +1,7 @@
 import React from 'react'
 import { Avatar, Text } from '@ui-kitten/components'
 import { ImageBackground, View, StyleSheet, TouchableOpacity, FlatList, Button,  Image } from 'react-native';
+
 import AvatarImage from '../images/senora.png';
 import WelcomeImage from '../images/Brands_People_OxxoGas_gasolinera.png';
 import GasImage from '../images/Gas.png';
@@ -21,24 +22,25 @@ texto: 'Historial',
 ];
 
 const ListItem = ({ item, navigation }) => {
-const handlePress = () => {
-if (item.texto === 'Carga'){
-navigation.navigate('CargaParticular');
-} else if (item.texto === 'Historial'){
-navigation.navigate('HistorialParticular');
-}
-};
-return(
-<TouchableOpacity onPress={handlePress}>
-<View
+  const handlePress = () => {
+    if (item.texto === 'Carga'){
+      navigation.navigate('CargaParticular');
+    } else if (item.texto === 'Historial'){
+      navigation.navigate('HistorialParticular');
+    }
+  };
+
+  return(
+    <TouchableOpacity onPress={handlePress}>
+      <View
         style={{
-        flex: 1,
-        backgroundColor: 'white',
-        borderRadius: 20,
-        borderColor: 'black',
-        borderWidth: 2,
-        height: 230,
-        width: 160,
+          flex: 1,
+          backgroundColor: 'white',
+          borderRadius: 20,
+          borderColor: '#ddd',
+          borderWidth: 2,
+          height: 230,
+          width: 160,
         }}
 >
         <View
@@ -124,16 +126,16 @@ styles.container,
         alignItems:'center',
         }}
         >
-        <TouchableOpacity onPress={handlePress}>
-        <Avatar
-        source={AvatarImage}
-        ImageComponent={ImageBackground}
-        size='large'
-        style={{
-                borderColor:'black',
+          <TouchableOpacity onPress={handlePress}>
+            <Avatar
+              source={AvatarImage}
+              ImageComponent={ImageBackground}
+              size='large'
+              style={{
+                borderColor:'#ddd',
                 borderWidth:1,
-        }}
-        />
+              }}
+            />
         </TouchableOpacity>
         </View>
 </View>

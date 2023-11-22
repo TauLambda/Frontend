@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, TextComponent } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import InputField from "../components/InputField";
-import Selector from "../components/Selector"; 
+import Selector from "../components/Selector";
 
 const SignIn = ({navigation}) => {
     const construirJSON = () => {
@@ -146,7 +146,7 @@ return (
         </ScrollView>
 
     </View>
-);
+  );
 };
 
 

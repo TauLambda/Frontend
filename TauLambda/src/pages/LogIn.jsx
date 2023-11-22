@@ -51,6 +51,7 @@ const LogIn = ({navigation}) => {
                                     style={{ marginRight: 5 }}
                             />}
                             inputType="password"/>
+                                
                         </View>
                         <TouchableOpacity
                         onPress={() => {navigation.navigate('Welcome')}}
@@ -77,6 +78,7 @@ const LogIn = ({navigation}) => {
                                 <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
                                         <Text 
                                         style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Registrarse</Text>
+
                                 </TouchableOpacity>
                         </View>
                 </View>
