@@ -4,17 +4,27 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { readCardsByUserId } from '../services/cardService';
 
 const TarjetaCredito = ({ route, navigation }) => {
-  const [cardsData, setCardsData] = useState([]);
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [jsonData, setJsonData] = useState(null);
-  const [isModalVisible, setModalVisible] = React.useState(false);
-
   const { carga } = route.params;
   const { monto } = route.params;
   const { tipoGas } = route.params;
   const { metodoPago } = route.params;
 
   const userId = 5;
+
+  const [cardsData, setCardsData] = useState([]);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [jsonData, setJsonData] = useState(null);
+  const [isModalVisible, setModalVisible] = React.useState(false);
+
+  const fetchData = async () => {
+    try {
+      readCardsByUserId(userId).then((data) => {
+        setCardsData(data);
+      });
+    } catch (error) {
+      console.error('Error al obtener las tarjetas:', error);
+    }
+  }
 
   const obtenerFechaActual = () => {
     const fecha = new Date();
@@ -34,55 +44,37 @@ const TarjetaCredito = ({ route, navigation }) => {
       TipoGas: tipoGas,
       MetodoPago: metodoPago,
       FechaTransaccion: obtenerFechaActual(),
+      Estatus: 'Incompleto',
+      Bomba: 4,
+      ID_estacion: 2,
     };
 
     setJsonData(data);
   };
 
-  const fetchData = async () => {
-    try {
-      readCardsByUserId(userId).then((data) => {
-        setCardsData(data);
-      });
-    } catch (error) {
-      console.error('Error al obtener las tarjetas:', error);
+  const toggleModal = () => {
+    if (selectedCard) {
+      setModalVisible(!isModalVisible);
+    } else {
+      alert('Debe seleccionar una tarjeta de crédito');
     }
-  }
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const DATA = [
-    {
-      id: '1',
-      nombre: 'Jose Maria',
-      numeroTarjeta: 1234567891023456,
-      Expiracion: '12/20',
-      CVV: 252,
-    },
-    {
-      id: '2',
-      nombre: 'Maria Jose',
-      numeroTarjeta: 1234567891025634,
-      Expiracion: '12/20',
-      CVV: 252,
-    },
-  ];
+  useEffect(() => {
+    console.log(`TarjetaCredito: ${JSON.stringify(jsonData, null, 2)}`);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const handlePago = () => {
-    if (selectedCard) {
-      // Realizar el pago y mostrar el modal de pago aprobado
-      toggleModal();
-    } else {
-      // Mostrar un mensaje de error si no se selecciona una tarjeta
-      alert('Debe seleccionar una tarjeta de crédito');
+    if (jsonData !== null) {
+      if (selectedCard) {
+        setModalVisible(!isModalVisible);
+      } else {
+        alert('Debe seleccionar una tarjeta de crédito');
+      }
     }
-  };
+  }, [jsonData]);
 
   return (
     <View style={styles.container}>
@@ -128,7 +120,7 @@ const TarjetaCredito = ({ route, navigation }) => {
         )}
       />
       <View style={{ alignItems: 'center', marginTop: 20 }}>
-        <TouchableOpacity style={styles.pagarButton} onPress={handlePago}>
+        <TouchableOpacity style={styles.pagarButton} onPress={construirJSON}>
           <Text style={{ fontSize: 20, color: 'white' }}>{`Pagar ${monto}`}</Text>
         </TouchableOpacity>
       </View>
