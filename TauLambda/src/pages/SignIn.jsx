@@ -7,8 +7,8 @@ import Selector from "../components/Selector";
 const SignIn = ({navigation}) => {
     const construirJSON = () => {
         if (selectedService && selectedPayment) {
-        const nombre = parseString(monto);
-        const placa = parseString(litros);
+        const modelo = parseString(modelo);
+        const placa = parseString(placa);
     
         if (!isNaN(montoNum) && !isNaN(litrosNum)) {
             const data = {
