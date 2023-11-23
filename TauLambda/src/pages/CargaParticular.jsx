@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Alert, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons, FontAwesome, MaterialIcons, Fontisto } from '@expo/vector-icons';
 
@@ -76,17 +76,6 @@ const CargaParticular = ({navigation}) => {
     {tipo:'Cashback'},
   ];
 
-const obtenerFechaActual = () => {
-  const fecha = new Date();
-  const año = fecha.getFullYear();
-  const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-  const dia = String(fecha.getDate()).padStart(2, '0');
-  const hora = String(fecha.getHours()).padStart(2, '0');
-  const minutos = String(fecha.getMinutes()).padStart(2, '0');
-  const segundos = String(fecha.getSeconds()).padStart(2, '0');
-  return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
-};
-
 const alertaServicioPago = () => {
   Alert.alert('Error', 'Debe seleccionar un tipo de gasolina y/o método de pago válidos', [
     {text: 'OK'},
@@ -110,7 +99,6 @@ const construirJSON = () => {
           Monto: montoNum.toFixed(2),
           TipoGas: selectedService,
           MetodoPago: selectedPayment,
-          FechaTransaccion: obtenerFechaActual(),
         };
         setJsonData(data);
 
@@ -122,24 +110,31 @@ const construirJSON = () => {
     }
 };
 
-const handleContinuar = async () => {
+const handleContinuar = () => {
   construirJSON();
+}
 
-  console.log(jsonData);
-
+useEffect(() => {
+  console.log(`CargaParticular: ${JSON.stringify(jsonData, null, 2)}`);
 
   if (jsonData !== null) {
     if (selectedPayment === 'Tarjeta de Credito') {
       navigation.navigate('TarjetaCredito', {
-         monto: jsonData.Monto,
-        });
+        carga: jsonData.Carga,
+        monto: jsonData.Monto,
+        tipoGas: jsonData.TipoGas,
+        metodoPago: jsonData.MetodoPago,
+      });
     } else if (selectedPayment === 'Cashback', { jsonData }) {
       navigation.navigate('Cashback', {
+        carga: jsonData.Carga,
         monto: jsonData.Monto,
+        tipoGas: jsonData.TipoGas,
+        metodoPago: jsonData.MetodoPago,
       });
     }
   }
-}
+}, [jsonData]);
 
   return (
     <View style={[styles.container]}>
