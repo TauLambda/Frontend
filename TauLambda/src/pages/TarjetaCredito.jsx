@@ -4,12 +4,40 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { readCardsByUserId } from '../services/cardService';
 
 const TarjetaCredito = ({ route, navigation }) => {
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [isModalVisible, setModalVisible] = React.useState(false);
   const [cardsData, setCardsData] = useState([]);
+  const [selectedCard, setSelectedCard] = React.useState(null);
+  const [jsonData, setJsonData] = useState(null);
+  const [isModalVisible, setModalVisible] = React.useState(false);
 
+  const { carga } = route.params;
   const { monto } = route.params;
+  const { tipoGas } = route.params;
+  const { metodoPago } = route.params;
+
   const userId = 5;
+
+  const obtenerFechaActual = () => {
+    const fecha = new Date();
+    const año = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const hora = String(fecha.getHours()).padStart(2, '0');
+    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+    const segundos = String(fecha.getSeconds()).padStart(2, '0');
+    return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
+  };
+
+  const construirJSON = () => {
+    const data = {
+      Carga: carga,
+      Monto: monto,
+      TipoGas: tipoGas,
+      MetodoPago: metodoPago,
+      FechaTransaccion: obtenerFechaActual(),
+    };
+
+    setJsonData(data);
+  };
 
   const fetchData = async () => {
     try {
