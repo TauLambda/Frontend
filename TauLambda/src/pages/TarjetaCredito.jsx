@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, Modal } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { readCardsByUserId } from '../services/cardService';
+import { createHistory } from '../services/historyService';
 
 const TarjetaCredito = ({ route, navigation }) => {
   const { carga } = route.params;
@@ -45,6 +46,7 @@ const TarjetaCredito = ({ route, navigation }) => {
       MetodoPago: metodoPago,
       FechaTransaccion: obtenerFechaActual(),
       Estatus: 'Incompleto',
+      ID_carro: 2,
       Bomba: 4,
       ID_estacion: 2,
     };
@@ -70,6 +72,8 @@ const TarjetaCredito = ({ route, navigation }) => {
     if (jsonData !== null) {
       if (selectedCard) {
         setModalVisible(!isModalVisible);
+
+        createHistory(userId, jsonData);
       } else {
         alert('Debe seleccionar una tarjeta de crédito');
       }
@@ -99,6 +103,13 @@ const TarjetaCredito = ({ route, navigation }) => {
         >
           <Ionicons name="add" size={24} color="black" />
           <Text>Agregar tarjeta nueva</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.card, {borderColor:'#ddd'}]}
+          onPress={() => fetchData()}
+        >
+          <Ionicons name="refresh" size={24} color="black" />
+          <Text>Recargar tarjetas</Text>
         </TouchableOpacity>
       </View>
       <FlatList

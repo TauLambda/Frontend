@@ -11,4 +11,13 @@ export async function readCardsByUserId(id) {
     }
 
     return cards;
-}
+};
+
+export async function createCard(id, data) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/card/createCard/${id}`, data)
+        console.log(`Tarjetas createCard: ${response.data}`)
+    } catch (error) {
+        console.log(`Error createCard: ${error.message}`)
+    }
+};

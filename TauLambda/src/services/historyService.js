@@ -11,4 +11,13 @@ export async function readHistoryByUserId(id) {
     }
 
     return history;
-}
+};
+
+export async function createHistory(id, data) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/history/createHistory/${id}`, data)
+        console.log(`Historial createHistory: ${response.data}`)
+    } catch (error) {
+        console.log(`Error createHistory: ${error.message}`)
+    }
+};
