@@ -1,12 +1,42 @@
 import { StyleSheet, Text, TouchableOpacity, View, Modal, Alert } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Cashback = ({ route, navigation }) => {
+  const { carga } = route.params;
   const { monto } = route.params;
+  const { tipoGas } = route.params;
+  const { metodoPago } = route.params;
 
-  const [isModalVisible, setModalVisible] = React.useState(false);
-  const [cashback, setCashback] = React.useState(300.59);
+  const [jsonData, setJsonData] = useState(null);
+  const [cashback, setCashback] = useState(300.59);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const obtenerFechaActual = () => {
+    const fecha = new Date();
+    const año = fecha.getFullYear();
+    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+    const dia = String(fecha.getDate()).padStart(2, '0');
+    const hora = String(fecha.getHours()).padStart(2, '0');
+    const minutos = String(fecha.getMinutes()).padStart(2, '0');
+    const segundos = String(fecha.getSeconds()).padStart(2, '0');
+    return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
+  };
+
+  const construirJSON = () => {
+    const data = {
+      Carga: carga,
+      Monto: monto,
+      TipoGas: tipoGas,
+      MetodoPago: metodoPago,
+      FechaTransaccion: obtenerFechaActual(),
+      Estatus: 'Incompleto',
+      Bomba: 4,
+      ID_estacion: 2,
+    };
+
+    setJsonData(data);
+  };
 
   const toggleModal = () => {
     if (monto > cashback) {
@@ -15,6 +45,18 @@ const Cashback = ({ route, navigation }) => {
       setModalVisible(!isModalVisible);
     }
   };
+
+  useEffect(() => {
+    console.log(`Cashback: ${JSON.stringify(jsonData, null, 2)}`);
+
+    if (jsonData !== null) {
+      if (monto > cashback) {
+        Alert.alert('Saldo Insuficiente', 'No tienes suficiente cashback para realizar esta transacción.');
+      } else {
+        setModalVisible(!isModalVisible);
+      }
+    }
+  }, [jsonData])
 
   return (
     <View style={styles.container}>
@@ -29,7 +71,7 @@ const Cashback = ({ route, navigation }) => {
         <Ionicons name="cash-outline" size={120} color="#666" style={{marginTop:30,}}/>
       </View>
       <View style={{flex:0.5, flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-        <TouchableOpacity style={styles.pagarButton} onPress={toggleModal}>
+        <TouchableOpacity style={styles.pagarButton} onPress={construirJSON}>
           <Text style={{ fontSize: 20, color: 'white' }}>{`Pagar ${monto}`}</Text>
         </TouchableOpacity>
       </View>

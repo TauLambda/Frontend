@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Alert, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons, FontAwesome, MaterialIcons, Fontisto } from '@expo/vector-icons';
 
@@ -122,24 +122,31 @@ if (selectedService && selectedPayment) {
 }
 };
 
-const handleContinuar = async () => {
-construirJSON();
+const handleContinuar = () => {
+  construirJSON();
+}
 
-console.log(jsonData);
+useEffect(() => {
+  console.log(`CargaParticular: ${JSON.stringify(jsonData, null, 2)}`);
 
-
-if (jsonData !== null) {
-if (selectedPayment === 'Tarjeta de Credito') {
-    navigation.navigate('TarjetaCredito', {
+  if (jsonData !== null) {
+    if (selectedPayment === 'Tarjeta de Credito') {
+      navigation.navigate('TarjetaCredito', {
+        carga: jsonData.Carga,
         monto: jsonData.Monto,
-    });
-} else if (selectedPayment === 'Cashback', { jsonData }) {
-    navigation.navigate('Cashback', {
-    monto: jsonData.Monto,
-    });
-}
-}
-}
+        tipoGas: jsonData.TipoGas,
+        metodoPago: jsonData.MetodoPago,
+      });
+    } else if (selectedPayment === 'Cashback', { jsonData }) {
+      navigation.navigate('Cashback', {
+        carga: jsonData.Carga,
+        monto: jsonData.Monto,
+        tipoGas: jsonData.TipoGas,
+        metodoPago: jsonData.MetodoPago,
+      });
+    }
+  }
+}, [jsonData]);
 
 return (
 <View style={[styles.container]}>
