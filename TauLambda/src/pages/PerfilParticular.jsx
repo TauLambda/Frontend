@@ -7,6 +7,37 @@ import Selector from "../components/Selector";
 
 // ProfileScreen component
 const PerfilParticular = ({navigation}) => {
+
+    userData = {
+        "ID_usuario": 5,
+        "Nombre": "Usuario Cinco",
+        "Contrasena": "contrasena5",
+        "Correo": "correo5@gmail.com",
+        "Telefono": "5512345672",
+        "TipoUsuario": "Flotilla",
+        "Cashback": 100
+    }
+
+    carData = [
+        {
+            "ID_carro": 8,
+            "Placa": "XWD-005-1",
+            "Modelo": "NULL",
+            "ID_usuario": 5
+        },
+        {
+            "ID_carro": 9,
+            "Placa": "XWD-005-2",
+            "Modelo": "NULL",
+            "ID_usuario": 5
+        },
+        {
+            "ID_carro": 35,
+            "Placa": "NKR9359",
+            "Modelo": "TSURU tuneado",
+            "ID_usuario": 5
+        }
+    ]
 return (
 <View
     style={{
@@ -33,80 +64,99 @@ return (
         fontSize: 28,
         fontWeight: "500",
         color: "#9b101a",
-        marginBottom: 30,
+        marginBottom: 10,
         paddingLeft: 10,
+        fontWeight:"bold"
         }}
-        >Registrarse
+        >Perfil de usuario
         </Text>
 
         <ScrollView style={{ marginLeft: 10, marginRight: 10, flex:2}}>
 
-            <View>
-                <MaterialIcons
-                        name="emoji-emotions"
-                        size={30}
-                        color={"#e8a042"}
-                        style={{ marginRight: 5 }}
-                />
-                <Text>Nombre Completo</Text>
-            </View>
-            
-            <View>
-                <MaterialIcons
-                        name="phone"
-                        size={30}
-                        color={"#e8a042"}
-                        style={{ marginRight: 5 }}
-                />
-                <Text>
-                    Número de celular
-                </Text>
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Nombre Completo</Text>
+                <View style={{flexDirection: "row"}}>
+                    <MaterialIcons
+                            name="emoji-emotions"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <Text style={{textAlignVertical:"center"}}>{userData.Nombre}</Text>
+                </View>         
             </View>
 
-            <View>
-                <MaterialIcons
-                        name="alternate-email"
-                        size={30}
-                        color={"#e8a042"}
-                        style={{ marginRight: 5 }}
-                />
-                <Text>
-                    Correo electrónico
-                </Text>
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Número de celular</Text>
+                <View style={{flexDirection: "row"}}>
+                    <MaterialIcons
+                            name="phone"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <Text style={{textAlignVertical:"center"}}>{userData.Telefono}</Text>
+                </View>         
             </View>
 
-            <View>
-                <Selector />
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Correo Electrónico</Text>
+                <View style={{flexDirection: "row"}}>
+                    <MaterialIcons
+                            name="alternate-email"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <Text style={{textAlignVertical:"center"}}>{userData.Correo}</Text>
+                </View>         
             </View>
 
-            <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-            backgroundColor: "#de2924",
-            padding: 20,
-            borderRadius: 10,
-            marginBottom: 30,
-            }}
-
-            >
-            <Text
-            style={{
-            textAlign: "center",
-            fontWeight: "700",
-            fontSize: 16,
-            color: "#fff",
-            }}
-            >
-            Registrarse
-            </Text>
-            </TouchableOpacity>
-            <View style={{flexDirection:'row', justifyContent: 'center', marginBottom:5 }}>
-            <Text >¿Ya tiene una cuenta?</Text>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text 
-            style={{color:'#de2924', fontWeight: '700', fontSize:17}}> Ingresar </Text>
-            </TouchableOpacity>
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Tipo de Usuario </Text>
+                <View style={{flexDirection: "row"}}>
+                    <MaterialIcons
+                            name="group"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <Text style={{textAlignVertical:"center"}}>{userData.TipoUsuario}</Text>
+                </View>         
             </View>
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Cashback </Text>
+                <View style={{flexDirection: "row"}}>
+                    <MaterialIcons
+                            name="attach-money"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <Text style={{textAlignVertical:"center"}}>{userData.Cashback}</Text>
+                </View>         
+            </View>
+            <View style={{marginVertical:10}}>
+                <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Carro </Text>
+
+                {carData.map((car,index) => (
+                    <View style={{flexDirection: "row", marginVertical: 5}}>
+                    <MaterialIcons
+                            name="directions-car"
+                            size={30}
+                            color={"#e8a042"}
+                            style={{ marginRight: 5}}
+                    />
+                    <View key={index}>
+                        <Text style={{textAlignVertical:"center", fontWeight: "bold"}}>Modelo: </Text>
+                        {car.Modelo}
+                        <Text style={{textAlignVertical:"center"}}>Placa: </Text>
+                        {car.Placa}
+                    </View>
+                </View>
+                ))}            
+            </View>
+
         </ScrollView>
 
     </View>
