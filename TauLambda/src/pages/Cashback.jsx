@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Modal, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { createHistory } from '../services/historyService';
 
 const Cashback = ({ route, navigation }) => {
   const { carga } = route.params;
@@ -11,6 +12,8 @@ const Cashback = ({ route, navigation }) => {
   const [jsonData, setJsonData] = useState(null);
   const [cashback, setCashback] = useState(300.59);
   const [isModalVisible, setModalVisible] = useState(false);
+
+  const userId = 5;
 
   const obtenerFechaActual = () => {
     const fecha = new Date();
@@ -31,6 +34,7 @@ const Cashback = ({ route, navigation }) => {
       MetodoPago: metodoPago,
       FechaTransaccion: obtenerFechaActual(),
       Estatus: 'Incompleto',
+      ID_carro: 2,
       Bomba: 4,
       ID_estacion: 2,
     };
@@ -53,6 +57,8 @@ const Cashback = ({ route, navigation }) => {
       if (monto > cashback) {
         Alert.alert('Saldo Insuficiente', 'No tienes suficiente cashback para realizar esta transacción.');
       } else {
+        createHistory(userId, jsonData);
+
         setModalVisible(!isModalVisible);
       }
     }

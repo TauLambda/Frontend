@@ -1,38 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Modal, Alert, StyleSheet } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { createCard } from '../services/cardService';
 
 const AgregarTarjeta = ({ navigation }) => {
   const [numeroTarjeta, setNumeroTarjeta] = useState('');
+  const [numeroTarjetaFormateado, setNumeroTarjetaFormateado] = useState('');
   const [nombreTitular, setNombreTitular] = useState('');
   const [fechaExpiracion, setFechaExpiracion] = useState('');
   const [cvv, setCVV] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
+  const [jsonData, setJsonData] = useState(null);
+
+  const userId = 5;
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
   const handleConfirmar = () => {
+    const numeroTarjetaSinEspacios = numeroTarjeta.replace(/\s/g, '');
+    const mes = parseInt(fechaExpiracion.substring(0, 2), 10);
+
     if (numeroTarjeta && nombreTitular && fechaExpiracion && cvv) {
-      // Construir el JSON
-      const jsonTarjeta = {
-        nombre: nombreTitular,
-        numeroTarjeta: numeroTarjeta,
-        Expiracion: fechaExpiracion,
-        CVV: cvv,
+      if (numeroTarjetaSinEspacios.length === 16 && mes >= 1 && mes <= 12 && cvv.length === 3) {
+        const jsonTarjeta = {
+          Nombre: nombreTitular,
+          NumeroTarjeta: numeroTarjeta,
+          Expiracion: fechaExpiracion,
+          CVV: cvv,
+        };
+
+        setJsonData(jsonTarjeta);
+      } else {
+        Alert.alert('Error', 'Por favor, ingresa valores válidos.', [
+          { text: 'OK' },
+        ]);
       };
-
-      // Mostrar el modal
-      toggleModal();
-
     } else {
       Alert.alert('Error', 'Todos los campos deben contener información.', [
         { text: 'OK' },
       ]);
     }
   };
+
+  useEffect(() => {
+    console.log(`AgregarTarjeta: ${JSON.stringify(jsonData, null, 2)}`);
+
+    if (jsonData !== null){
+      createCard(userId, jsonData);
+
+      toggleModal();
+    }
+  }, [jsonData])
 
   return (
     <View style={styles.container}>
@@ -62,9 +83,18 @@ const AgregarTarjeta = ({ navigation }) => {
           <Ionicons name="card" size={20} color="#666" style={styles.icon} />
           <TextInput
             placeholder='1234 5678 9102 3456'
+            maxLength={19}
             style={styles.input}
             keyboardType="numeric"
-            onChangeText={(text) => setNumeroTarjeta(text)}
+            value={numeroTarjetaFormateado}
+            onChangeText={(text) => {
+              const numerosSolo = text.replace(/\D/g, '');
+
+              const formateado = numerosSolo.replace(/(\d{4})/g, '$1 ');
+
+              setNumeroTarjetaFormateado(formateado);
+              setNumeroTarjeta(numerosSolo);
+            }}
           />
         </View>
         <Text>Nombre del Titular de La Tarjeta</Text>
@@ -81,8 +111,16 @@ const AgregarTarjeta = ({ navigation }) => {
           <Ionicons name="calendar-outline" size={20} color="#666" style={styles.icon} />
           <TextInput
             style={styles.input}
-            placeholder="12/20"
-            onChangeText={(text) => setFechaExpiracion(text)}
+            keyboardType="numeric"
+            placeholder="01/23"
+            maxLength={5}
+            value={fechaExpiracion}
+            onChangeText={(text) => {
+              if (text.length === 2 && !text.includes('/')) {
+                text += '/';
+              }
+              setFechaExpiracion(text);
+            }}
           />
         </View>
         <Text>CVV</Text>
@@ -90,7 +128,9 @@ const AgregarTarjeta = ({ navigation }) => {
             <Ionicons name="card" size={20} color="#666" style={styles.icon} />
             <TextInput
               style={styles.rowInput}
+              keyboardType="numeric"
               placeholder="252"
+              maxLength={3}
               onChangeText={(text) => setCVV(text)}
             />
         </View>
