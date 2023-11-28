@@ -3,27 +3,25 @@ import { API_BASE_URL } from "../config"; // Replace with your actual API base U
 
 export async function readUserByEmail(email, password) {
     try {
-        console.log(email, password);
-        console.log(`${API_BASE_URL}/user/loginUser`);
-
         const data = JSON.stringify({ 
             Correo: email,
             Contrasena: password
         });
-customConfig = {
-    headers: {
-    'Content-Type': 'application/json'
-    }
-};
+        customConfig = {
+            headers: {
+            'Content-Type': 'application/json'
+            }
+        };
 
         const response = await axios.post(`${API_BASE_URL}/user/loginUser`, data,customConfig);
 
-        console.log(response);
+        //console.log(response);
 
         const user = response.data;
-        console.log(`User: ${JSON.stringify(user, null, 2)}`);
-
+        //console.log(user)
+        //console.log(`User: ${JSON.stringify(user, null, 2)}`);
         return user;
+        
     } catch (error) {
         if (error.response) {
             console.log('Server responded with an error status:', error.response.status);

@@ -7,7 +7,7 @@ import { readUserByEmail } from "../services/loginService";
 const LogIn = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    
     return (
         <View
         style={{
@@ -61,11 +61,17 @@ const LogIn = ({navigation}) => {
                     
             </View>
             <TouchableOpacity
-            onPress={() => {
-                readUserByEmail(email, password)
-                navigation.navigate('Welcome');
-            }
-            }
+            onPress={async () => {
+                try {
+                    const userData = await readUserByEmail(email, password);
+                    navigation.navigate('Welcome', {idUser : userData.ID_usuario});
+                    console.log({idUser : userData.ID_usuario})
+                } catch (error) {
+                    // Handle error (e.g., show an error message)
+                    console.error('Login failed:', error.message);
+                }
+            }}
+            
             style={{
             backgroundColor: "#de2924",
             padding: 20,

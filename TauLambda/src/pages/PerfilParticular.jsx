@@ -4,13 +4,17 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import InputField from "../components/InputField";
 import Selector from "../components/Selector"; 
+import { useRoute } from '@react-navigation/native';
 
 // ProfileScreen component
-const PerfilParticular = ({navigation}) => {
+const PerfilParticular = ({route, navigation}) => {
+    console.log(route)
+    const { idUser } = route.params;
+    console.log(idUser)
 
     userData = {
-        "ID_usuario": 5,
-        "Nombre": "Usuario Cinco",
+        "ID_usuario": 3,
+        "Nombre": "Usuario Tres",
         "Contrasena": "contrasena5",
         "Correo": "correo5@gmail.com",
         "Telefono": "5512345672",
