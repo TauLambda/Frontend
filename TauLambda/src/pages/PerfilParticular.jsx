@@ -1,43 +1,46 @@
 // Import necessary dependencies
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import InputField from "../components/InputField";
-import Selector from "../components/Selector"; 
+import { userCars } from "../services/carsService";
 
 // ProfileScreen component
-const PerfilParticular = ({navigation}) => {
+const PerfilParticular = ({route, navigation}) => {
+
+    const {ID_usuario} = route.params;
+    const {Nombre} = route.params;
+    const {Contrasena} = route.params;
+    const {Correo} = route.params;
+    const {Telefono} = route.params;
+    const {TipoUsuario} = route.params;
+    const {Cashback} = route.params;
 
     userData = {
-        "ID_usuario": 5,
-        "Nombre": "Usuario Cinco",
-        "Contrasena": "contrasena5",
-        "Correo": "correo5@gmail.com",
-        "Telefono": "5512345672",
-        "TipoUsuario": "Flotilla",
-        "Cashback": 100
+        ID_usuario: ID_usuario,
+        Nombre: Nombre,
+        Contrasena: Contrasena,
+        Correo: Correo,
+        Telefono: Telefono,
+        TipoUsuario: TipoUsuario,
+        Cashback: Cashback
     }
 
-    carData = [
-        {
-            "ID_carro": 8,
-            "Placa": "XWD-005-1",
-            "Modelo": "NULL",
-            "ID_usuario": 5
-        },
-        {
-            "ID_carro": 9,
-            "Placa": "XWD-005-2",
-            "Modelo": "NULL",
-            "ID_usuario": 5
-        },
-        {
-            "ID_carro": 35,
-            "Placa": "NKR9359",
-            "Modelo": "TSURU tuneado",
-            "ID_usuario": 5
-        }
-    ]
+    const [carsData, setCarsData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const carsData = await userCars(ID_usuario);
+                console.log(carsData);
+                setCarsData(carsData);
+            } catch (error) {
+                console.error("Error fetching cars data:", error);
+            }
+        };
+
+        fetchData();
+    }, [ID_usuario]);
+
 return (
 <View
     style={{
@@ -139,7 +142,7 @@ return (
             <View style={{marginVertical:10}}>
                 <Text style={{ fontWeight: "bold", fontSize:16, marginBottom: 5}}>Carro </Text>
 
-                {carData.map((car,index) => (
+                {carsData.map((car, index) => (
                     <View style={{flexDirection: "row", marginVertical: 5}}>
                     <MaterialIcons
                             name="directions-car"
@@ -149,12 +152,38 @@ return (
                     />
                     <View key={index}>
                         <Text style={{textAlignVertical:"center", fontWeight: "bold"}}>Modelo: </Text>
-                        {car.Modelo}
-                        <Text style={{textAlignVertical:"center"}}>Placa: </Text>
-                        {car.Placa}
+                        <Text> {car.Modelo} </Text>
+                        
+                        <Text style={{textAlignVertical:"center",  fontWeight: "bold"}}>Placa: </Text>
+                        <Text> {car.Placa}</Text>
                     </View>
                 </View>
-                ))}            
+                ))}  
+                <TouchableOpacity
+            onPress= {() => navigation.navigate('AgregarPlaca',
+            {
+                ID_usuario : ID_usuario
+            })}
+            style={{
+            backgroundColor: "#de2924",
+            padding: 20,
+            borderRadius: 10,
+            marginTop:30,
+            marginBottom: 30,
+            }}
+            >
+                
+                <Text
+                style={{
+                textAlign: "center",
+                fontWeight: "700",
+                fontSize: 16,
+                color: "#fff",
+                }}
+                >
+                Añadir Carro
+                </Text>
+            </TouchableOpacity>          
             </View>
 
         </ScrollView>

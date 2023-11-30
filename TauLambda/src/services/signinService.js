@@ -1,11 +1,15 @@
 import axios from "axios";
 import { API_BASE_URL } from "../config"; // Replace with your actual API base URL
 
-export async function readUserByEmail(email, password) {
+export async function createUser(name, email, password, phone, userType) {
     try {
-        const data = JSON.stringify({ 
+        const data = JSON.stringify({
+            Nombre: name,
+            Contrasena: password,
             Correo: email,
-            Contrasena: password
+            Telefono: phone,
+            TipoUsuario: userType,
+            Cashback: 0
         });
         customConfig = {
             headers: {
@@ -13,14 +17,8 @@ export async function readUserByEmail(email, password) {
             }
         };
 
-        const response = await axios.post(`${API_BASE_URL}/user/loginUser`, data,customConfig);
-
-        //console.log(response);
-
-        const user = response.data;
-        //console.log(user)
-        //console.log(`User: ${JSON.stringify(user, null, 2)}`);
-        return user;
+        const response = await axios.post(`${API_BASE_URL}/user/createUser`, data,customConfig);
+        console.log(response)
         
     } catch (error) {
         if (error.response) {

@@ -1,32 +1,34 @@
-import React from "react";
+import React,{useState} from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, TextComponent } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import InputField from "../components/InputField";
 import Selector from "../components/Selector";
+import { createUser } from "../services/signinService";
 
 const SignIn = ({navigation}) => {
-    const construirJSON = () => {
-        if (selectedService && selectedPayment) {
-        const modelo = parseString(modelo);
-        const placa = parseString(placa);
+    const [name, setName] = useState("")
+    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState(null)
+    const [userType, setUserType] = useState("")
+
+    const handleRegistrar = () => {
+        // Construct the JSON object with the input field values
+        const userData = {
+        name: name,
+        phone: phone,
+        email: email,
+        password: password,
+        userType: userType,
+        };
     
-        if (!isNaN(montoNum) && !isNaN(litrosNum)) {
-            const data = {
-            Carga: litrosNum.toFixed(2),
-            Monto: montoNum.toFixed(2),
-            TipoGas: selectedService,
-            MetodoPago: selectedPayment,
-            FechaTransaccion: obtenerFechaActual(),
-            };
-            setJsonData(data);
+        // Log the JSON object for testing purposes
+        console.log(userData);
     
-            console.log(jsonData);
-        } else {
-            alertaMontoLitros();
-        }
-        } else {
-        alertaServicioPago();
-        }
+        // You can perform further actions with the userData, such as sending it to a server
+        createUser(name,email, password, phone, userType)
+
+        navigation.navigate('Login')
     };
 
 return (
@@ -70,7 +72,9 @@ return (
                     size={30}
                     color={"#e8a042"}
                     style={{ marginRight: 5 }}
-            />}/>
+            />}
+            value={name}
+            onChangeText={(text) => setName(text)}/>
 
             <InputField  
             label={'Número de celular'}
@@ -79,7 +83,9 @@ return (
                     size={30}
                     color={"#e8a042"}
                     style={{ marginRight: 5 }}
-            />}/>
+            />}
+            value={phone}
+            onChangeText={(text) => setPhone(text)}/>
 
             <InputField  
             label={'Correo electrónico'}
@@ -89,34 +95,28 @@ return (
                     color={"#e8a042"}
                     style={{ marginRight: 5 }}
             />}
-            keyboardType="email-address"/>
+            keyboardType="email-address"
+            value={email}
+            onChangeText={(text) => setEmail(text)}/>
 
             <InputField  
-            label={'Placa de automóvil'}
-            icon={<MaterialIcons
-                    name="web-asset"
-                    size={30}
-                    color={"#e8a042"}
-                    style={{ marginRight: 5 }}
-            />}
-            />
-            
-            <InputField  
-            label={'Placa de automóvil'}
-            icon={<MaterialIcons
-                    name="web-asset"
-                    size={30}
-                    color={"#e8a042"}
-                    style={{ marginRight: 5 }}
-            />}
-            />
+                label={'Contraseña'}
+                icon={<MaterialIcons
+                        name="lock"
+                        size={30}
+                        color={"#e8a042"}
+                        style={{ marginRight: 5 }}
+                />}
+                inputType="password"
+                value={password}
+                onChangeText={(text) => setPassword(text)}/>
 
             <View>
-                <Selector />
+                <Selector onSelect={(selectedValue) => setUserType(selectedValue)}/>
             </View>
 
             <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={handleRegistrar}
             style={{
             backgroundColor: "#de2924",
             padding: 20,
@@ -146,7 +146,7 @@ return (
         </ScrollView>
 
     </View>
-  );
+);
 };
 
 

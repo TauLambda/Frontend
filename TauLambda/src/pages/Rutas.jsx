@@ -77,6 +77,7 @@ return (
                 name='AgregarPlaca'
                 component={AgregarPlaca}
                 options={{title: 'Agregar Placa'}}/>
+                
         </Stack.Navigator>
 </NavigationContainer>
 );
