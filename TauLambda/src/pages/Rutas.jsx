@@ -11,6 +11,7 @@ import SignIn from './SignIn';
 import TarjetaCredito from './TarjetaCredito';
 import AgregarTarjeta from './AgregarTarjeta';
 import Cashback from './Cashback';
+import AgregarPlaca from './AgregarPlaca';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,36 +36,48 @@ return (
                         component={Welcome}
                         options={{ title: 'Welcome'}}
                 />
+
                 <Stack.Screen
                 name="CargaParticular"
                 component={CargaParticular}
                 options={{ title: 'Carga Particular'}}
                 />
+
                 <Stack.Screen
                         name="HistorialParticular"
                         component={HistorialParticular}
                         options={{ title: 'Historial Particular' }}
                 />
+
                 <Stack.Screen
                 name="PerfilParticular"
                 component={PerfilParticular}
                 options={{ title: 'Perfil Particular' }}
                 />
+
                 <Stack.Screen
                 name="TarjetaCredito"
                 component={TarjetaCredito}
                 options={{ title: 'Tarjeta de Credito'}}
                 />
+
                 <Stack.Screen
                 name='AgregarTarjeta'
                 component={AgregarTarjeta}
                 options={{ title: 'Agregar Tarjeta' }}
                 />
+
                 <Stack.Screen
                 name='Cashback'
                 component={Cashback}
                 options={{ title: 'Cashback' }}
                 />
+
+                <Stack.Screen
+                name='AgregarPlaca'
+                component={AgregarPlaca}
+                options={{title: 'Agregar Placa'}}/>
+                
         </Stack.Navigator>
 </NavigationContainer>
 );
