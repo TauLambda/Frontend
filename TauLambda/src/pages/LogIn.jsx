@@ -64,8 +64,17 @@ const LogIn = ({navigation}) => {
             onPress={async () => {
                 try {
                     const userData = await readUserByEmail(email, password);
-                    navigation.navigate('Welcome', {idUser : userData.ID_usuario});
-                    console.log({idUser : userData.ID_usuario})
+                    navigation.navigate('Welcome', 
+                    {
+                        ID_usuario: userData.ID_usuario,
+                        Nombre: userData.Nombre,
+                        Contrasena: userData.Contrasena,
+                        Correo: userData.Correo,
+                        Telefono: userData.Telefono,
+                        TipoUsuario: userData.TipoUsuario,
+                        Cashback: userData.Cashback
+                    });
+            
                 } catch (error) {
                     // Handle error (e.g., show an error message)
                     console.error('Login failed:', error.message);

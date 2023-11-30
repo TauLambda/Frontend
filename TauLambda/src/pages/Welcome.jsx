@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Avatar, Text } from '@ui-kitten/components'
 import { ImageBackground, View, StyleSheet, TouchableOpacity, FlatList, Button,  Image } from 'react-native';
 
@@ -84,8 +84,26 @@ const ListItem = ({ item, navigation }) => {
 }
 
 const Welcome = ({route, navigation}) => {
+    
+    const {ID_usuario} = route.params;
+    const {Nombre} = route.params;
+    const {Contrasena} = route.params;
+    const {Correo} = route.params;
+    const {Telefono} = route.params;
+    const {TipoUsuario} = route.params;
+    const {Cashback} = route.params;
+    
+
     const handlePress = () => {
-        navigation.navigate('PerfilParticular');
+        navigation.navigate('PerfilParticular', {
+            ID_usuario: ID_usuario,
+            Nombre: Nombre,
+            Contrasena: Contrasena,
+            Correo: Correo,
+            Telefono: Telefono,
+            TipoUsuario: TipoUsuario,
+            Cashback: Cashback
+        });
     }
     return (
         <View style={[
