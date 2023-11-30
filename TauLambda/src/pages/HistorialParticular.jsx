@@ -59,11 +59,15 @@ return(
 )
 }
 
-const HistorialParticular = ({navigation}) => {
-const [cashback, setCashback] = React.useState(300.59);
+const HistorialParticular = ({navigation, route}) => {
+
+const {ID_usuario} = route.params;
+const {Cashback} = route.params;
+
+const [cashback, setCashback] = React.useState(Cashback);
 const [historyData, setHistoryData] = useState([]);
 
-const userId = 5;
+const userId = ID_usuario;
 
 const fetchData = async () => {
     try {

@@ -58,12 +58,14 @@ const PagoCard = ({ tipoPago, isSelected, onSelect }) => {
     )
 };
 
-const CargaParticular = ({navigation}) => {
+const CargaParticular = ({navigation, route}) => {
     const [monto, setMonto] = useState(null);
     const [litros, setLitros] = useState(null);
     const [selectedService, setSelectedService] = useState(null);
     const [selectedPayment, setSelectedPayment] = useState(null);
     const [jsonData, setJsonData] = useState(null);
+
+    const {ID_usuario} = route.params;
 
     const servicios = [
         {servicio: 'Magna', precio:'22.49'},
@@ -136,6 +138,7 @@ const CargaParticular = ({navigation}) => {
                     monto: jsonData.Monto,
                     tipoGas: jsonData.TipoGas,
                     metodoPago: jsonData.MetodoPago,
+                    ID_usuario: ID_usuario
                 });
             } else if (selectedPayment === 'Cashback', { jsonData }) {
                 navigation.navigate('Cashback', {
@@ -143,6 +146,7 @@ const CargaParticular = ({navigation}) => {
                     monto: jsonData.Monto,
                     tipoGas: jsonData.TipoGas,
                     metodoPago: jsonData.MetodoPago,
+                    ID_usuario : ID_usuario
                 });
             }
         }

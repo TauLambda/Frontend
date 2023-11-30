@@ -1,19 +1,24 @@
+// Importar React y los componentes necesarios de React Native
 import { StyleSheet, Text, TouchableOpacity, View, Modal, Alert } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createHistory } from '../services/historyService';
 
+// Componente para la pantalla de Cashback
 const Cashback = ({ route, navigation }) => {
+    // Obtener parámetros de la ruta
     const { carga } = route.params;
     const { monto } = route.params;
     const { tipoGas } = route.params;
     const { metodoPago } = route.params;
+    const {ID_usuario} = route.params;
 
+    // Estados para almacenar datos JSON, cashback y visibilidad del modal
     const [jsonData, setJsonData] = useState(null);
-    const [cashback, setCashback] = useState(300.59);
+    const [cashback, setCashback] = useState(0);
     const [isModalVisible, setModalVisible] = useState(false);
 
-    const userId = 5;
+    const userId = ID_usuario;
 
     const obtenerFechaActual = () => {
         const fecha = new Date();
@@ -89,7 +94,7 @@ const Cashback = ({ route, navigation }) => {
                 <Text style={{ fontSize: 24, textAlign: 'center' }}>Pago Aprobado</Text>
                 <TouchableOpacity style={styles.closeButton} onPress={() => {
                 toggleModal();
-                navigation.navigate('Welcome')
+                navigation.navigate('Welcome', {ID_usuario : ID_usuario})
                 }}>
                 <Text style={{ fontSize: 18, color: 'white' }}>Cerrar</Text>
                 </TouchableOpacity>
