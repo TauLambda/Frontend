@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView, TextComponent } from "
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import InputField from "../components/InputField";
 import Selector from "../components/Selector";
+import { createUser } from "../services/signinService";
 
 const SignIn = ({navigation}) => {
     const [name, setName] = useState("")
@@ -25,6 +26,9 @@ const SignIn = ({navigation}) => {
         console.log(userData);
     
         // You can perform further actions with the userData, such as sending it to a server
+        createUser(name,email, password, phone, userType)
+
+        navigation.navigate('Login')
     };
 
 return (

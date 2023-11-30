@@ -4,6 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import InputField from '../components/InputField';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { createCar } from '../services/addCarService';
 
 const AgregarPlaca = ({ route, navigation }) => {
 const [numeroPlaca, setNumeroPlaca] = useState('');
@@ -27,6 +28,7 @@ const handleConfirmar = () => {
         console.log(jsonPlaca)
 
         // Mostrar el modal
+        createCar(modeloCarro, numeroPlaca, ID_usuario)
         toggleModal();
 
     } else {
@@ -106,7 +108,7 @@ return (
             <TouchableOpacity style={styles.closeButton} onPress={() => {
                 handleConfirmar
             toggleModal();
-            navigation.goBack(); // Regresar a la pantalla anterior
+            navigation.navigate("Welcome"); // Regresar a la pantalla anterior
             }}>
             <Text style={{ fontSize: 18, color: 'white' }}>Cerrar</Text>
             </TouchableOpacity>
