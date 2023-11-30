@@ -108,7 +108,7 @@ return (
             <TouchableOpacity style={styles.closeButton} onPress={() => {
                 handleConfirmar
             toggleModal();
-            navigation.navigate("Welcome"); // Regresar a la pantalla anterior
+            navigation.navigate("Welcome", {ID_usuario: ID_usuario}); // Regresar a la pantalla anterior
             }}>
             <Text style={{ fontSize: 18, color: 'white' }}>Cerrar</Text>
             </TouchableOpacity>
