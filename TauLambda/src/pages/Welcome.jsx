@@ -21,12 +21,12 @@ texto: 'Historial',
 }
 ];
 
-const ListItem = ({ item, navigation }) => {
+const ListItem = ({ item, navigation, ID_usuario, Cashback }) => {
     const handlePress = () => {
         if (item.texto === 'Carga'){
-        navigation.navigate('CargaParticular');
+        navigation.navigate('CargaParticular', {ID_usuario : ID_usuario});
         } else if (item.texto === 'Historial'){
-        navigation.navigate('HistorialParticular');
+        navigation.navigate('HistorialParticular', {ID_usuario : ID_usuario, Cashback : Cashback});
         }
     };
 
@@ -84,7 +84,6 @@ const ListItem = ({ item, navigation }) => {
 }
 
 const Welcome = ({route, navigation}) => {
-    
     const {ID_usuario} = route.params;
     const {Nombre} = route.params;
     const {Contrasena} = route.params;
@@ -92,7 +91,6 @@ const Welcome = ({route, navigation}) => {
     const {Telefono} = route.params;
     const {TipoUsuario} = route.params;
     const {Cashback} = route.params;
-    
 
     const handlePress = () => {
         navigation.navigate('PerfilParticular', {
@@ -105,6 +103,8 @@ const Welcome = ({route, navigation}) => {
             Cashback: Cashback
         });
     }
+
+
     return (
         <View style={[
         styles.container,
@@ -203,7 +203,7 @@ const Welcome = ({route, navigation}) => {
                 <FlatList
                 data={DATA}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <ListItem item={item} navigation={navigation}/>}
+                renderItem={({item}) => <ListItem item={item} navigation={navigation} ID_usuario={ID_usuario} Cashback={Cashback}/>}
                 numColumns={2}
                 columnWrapperStyle={{
                         justifyContent: 'space-between',
