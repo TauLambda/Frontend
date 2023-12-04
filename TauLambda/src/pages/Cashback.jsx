@@ -20,6 +20,7 @@ const Cashback = ({ route, navigation }) => {
 
     const userId = ID_usuario;
 
+    // Función para obtener la fecha actual en el formato deseado
     const obtenerFechaActual = () => {
         const fecha = new Date();
         const año = fecha.getFullYear();
@@ -31,6 +32,7 @@ const Cashback = ({ route, navigation }) => {
         return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
     };
 
+    // Función para construir el objeto JSON con los datos de la transacción
     const construirJSON = () => {
         const data = {
         Carga: carga,
@@ -47,6 +49,7 @@ const Cashback = ({ route, navigation }) => {
         setJsonData(data);
     };
 
+    // Función para alternar la visibilidad del modal
     const toggleModal = () => {
         if (monto > cashback) {
         Alert.alert('Saldo Insuficiente', 'No tienes suficiente cashback para realizar esta transacción.');

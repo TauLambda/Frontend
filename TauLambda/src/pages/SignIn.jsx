@@ -13,7 +13,7 @@ const SignIn = ({navigation}) => {
     const [userType, setUserType] = useState("")
 
     const handleRegistrar = () => {
-        // Construct the JSON object with the input field values
+        // Construir el objeto JSON con los valores de los campos de entrada
         const userData = {
         name: name,
         phone: phone,
@@ -22,10 +22,10 @@ const SignIn = ({navigation}) => {
         userType: userType,
         };
     
-        // Log the JSON object for testing purposes
+        // Registrar el objeto JSON con fines de prueba
         console.log(userData);
     
-        // You can perform further actions with the userData, such as sending it to a server
+        // Puedes realizar acciones adicionales con los datos de usuario, como enviarlos a un servidor
         createUser(name,email, password, phone, userType)
 
         navigation.navigate('Login')

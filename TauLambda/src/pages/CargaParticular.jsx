@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Alert, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons, FontAwesome, MaterialIcons, Fontisto } from '@expo/vector-icons';
 
+// Componente para mostrar la tarjeta de gasolina
 const GasolinaCard = ({ servicio, precio, isSelected, onSelect }) => {
     const coloresGasolina = {
         Diesel:'#0D0D0D',
@@ -34,6 +35,7 @@ const GasolinaCard = ({ servicio, precio, isSelected, onSelect }) => {
     );
 };
 
+// Componente para mostrar la tarjeta de pago
 const PagoCard = ({ tipoPago, isSelected, onSelect }) => {
     let iconComponent;
 
@@ -58,6 +60,7 @@ const PagoCard = ({ tipoPago, isSelected, onSelect }) => {
     )
 };
 
+// Componente principal para la carga particular
 const CargaParticular = ({navigation, route}) => {
     const [monto, setMonto] = useState(null);
     const [litros, setLitros] = useState(null);
@@ -78,6 +81,7 @@ const CargaParticular = ({navigation, route}) => {
         {tipo:'Cashback'},
     ];
 
+    // Función para obtener la fecha actual
     const obtenerFechaActual = () => {
         const fecha = new Date();
         const año = fecha.getFullYear();
@@ -89,18 +93,21 @@ const CargaParticular = ({navigation, route}) => {
         return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
     };
 
+    // Función para mostrar una alerta si no se ha seleccionado un servicio o método de pago válido
     const alertaServicioPago = () => {
         Alert.alert('Error', 'Debe seleccionar un tipo de gasolina y/o método de pago válidos', [
         {text: 'OK'},
         ]);
     };
 
+    // Función para mostrar una alerta si no se ha ingresado un monto o litros válido
     const alertaMontoLitros = () => {
         Alert.alert('Error', 'Debe ingresar un monto o litros válidos', [
             {text: 'OK'},
         ]);
     }
 
+    // Función para construir el objeto JSON con los datos de la carga
     const construirJSON = () => {
         if (selectedService && selectedPayment) {
             const montoNum = parseFloat(monto);
@@ -124,6 +131,7 @@ const CargaParticular = ({navigation, route}) => {
         }
     };
 
+    // Función para manejar el evento de continuar
     const handleContinuar = () => {
         construirJSON();
     }

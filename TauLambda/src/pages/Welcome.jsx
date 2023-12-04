@@ -8,6 +8,7 @@ import GasImage from '../images/Gas.png';
 import HistorialImage from '../images/Historial.png';
 import LogoImage from '../images/OXXOGAS2.png';
 
+// Definición de los datos para la lista
 const DATA = [
 {
 id: '1',
@@ -21,6 +22,7 @@ texto: 'Historial',
 }
 ];
 
+// Componente para cada elemento de la lista
 const ListItem = ({ item, navigation, ID_usuario, Cashback }) => {
     const handlePress = () => {
         if (item.texto === 'Carga'){
@@ -83,6 +85,7 @@ const ListItem = ({ item, navigation, ID_usuario, Cashback }) => {
     )
 }
 
+// Componente principal
 const Welcome = ({route, navigation}) => {
     const {ID_usuario} = route.params;
     const {Nombre} = route.params;
@@ -103,7 +106,6 @@ const Welcome = ({route, navigation}) => {
             Cashback: Cashback
         });
     }
-
 
     return (
         <View style={[
