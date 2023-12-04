@@ -18,6 +18,7 @@ const TarjetaCredito = ({ route, navigation }) => {
     const [jsonData, setJsonData] = useState(null);
     const [isModalVisible, setModalVisible] = React.useState(false);
 
+    // Función para obtener las tarjetas de crédito del usuario
     const fetchData = async () => {
         try {
             readCardsByUserId(ID_usuario).then((data) => {
@@ -28,6 +29,7 @@ const TarjetaCredito = ({ route, navigation }) => {
         }
     }
 
+    // Función para obtener la fecha actual en el formato deseado
     const obtenerFechaActual = () => {
         const fecha = new Date();
         const año = fecha.getFullYear();
@@ -39,6 +41,7 @@ const TarjetaCredito = ({ route, navigation }) => {
         return `${año}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
     };
 
+    // Función para construir el objeto JSON con los datos de la transacción
     const construirJSON = () => {
         const data = {
         Carga: carga,
@@ -55,6 +58,7 @@ const TarjetaCredito = ({ route, navigation }) => {
         setJsonData(data);
     };
 
+    // Función para mostrar u ocultar el modal de pago aprobado
     const toggleModal = () => {
         if (selectedCard) {
         setModalVisible(!isModalVisible);
@@ -63,10 +67,12 @@ const TarjetaCredito = ({ route, navigation }) => {
         }
     };
 
+    // Obtener las tarjetas de crédito al cargar el componente
     useEffect(() => {
         fetchData();
     }, []);
 
+    // Imprimir el objeto JSON en la consola cuando se actualice
     useEffect(() => {
         console.log(`TarjetaCredito: ${JSON.stringify(jsonData, null, 2)}`);
 
